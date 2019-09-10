@@ -1,0 +1,22 @@
+
+=== Sensor Tags (CC1350 & CC2650)
+
+[bibliography]
+==== Technical Documents
+
+- [[[st-td1]]] http://www.ti.com/lit/ug/swcu117h/swcu117h.pdf[CC13x0,CC26x0SimpleLink™ Wireless MCU Technical Reference Manual]
+
+[bibliography]
+==== More literature
+
+- [[[st-ml1]]] http://www.ti.com/lit/an/swra578a/swra578a.pdf[Getting Started With the CC13xx and CC26xx SensorController]
+- [[[st-ml2]]] http://www.ti.com/lit/ml/swat014/swat014.pdf[Meet the SimpleLink™ Sensor Controller]
+- [[[st-ml3]]] http://www.ti.com/lit/an/swra640b/swra640b.pdf[CC13xx/CC26xx Hardware Configuration and PCB Design Considerations]
+- [[[st-ml4]]] http://www.ti.com/lit/an/swru537/swru537.pdf[Integrating Sensor Controller Studio Examples Into ProjectZero]
+
+[bibliography]
+==== Software
+
+- [[[st-sw1]]] http://dev.ti.com/tirex/content/tirtos_cc13xx_cc26xx_2_21_00_06/release_notes_tirtos_cc13xx_cc26xx_2_21_00_06.html[TI-RTOS CC13XX and CC26XX]
+- [[[st-sw2]]] http://www.ti.com/lit/ml/swru439j/swru439j.pdf[CC26xx,CC13xx Sensor Controller Studio Version2.5]
+- [[[st-sw3]]] http://www.ti.com/tool/SIMPLELINK-CC13X0-SDK[SimpleLink™ Sub-1 GHz CC13x0 Software Development Kit]

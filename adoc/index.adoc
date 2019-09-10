@@ -1,0 +1,171 @@
+= Choosing another wireless microcontroller with sensors
+:includedir: _includes
+:imagesdir: ./images
+:shared-includedir: ../../shared/doc/_includes
+:icons: font
+:toc: left
+:nofooter:
+:source-highlighter: highlightjs
+:sectnums:
+:sectanchors:
+:sectlinks:
+// Refs:
+:r0: https://github.com/vittali/TiPs_4[compagnion repo]
+:rTI-1: http://www.ti.com/tool/CC1350STK[Simplelink CC1350 SensorTag Bluetooth and Sub-1GHz Long Range Wireless Development Kit]
+:rTI-2: http://www.ti.com/product/CC1350[CC1350F128RGZT]
+:rTI-3: http://www.ti.com/tool/CC2650STK[SimpleLink™ Bluetooth low energy/Multi-standard SensorTag CC2650STK]
+:rTI-4: https://e2e.ti.com[TI E2E™ support forums]
+:rTI-5: http://www.ti.com/tool/TMDSEMU110-U[XDS110 JTAG Debug Probe]
+:rTI-6: https://www.ti.com/tool/CC-DEVPACK-DEBUG[SimpleLink SensorTag Debugger DevPack]
+:r8: https://vittali.ch/TiPs_3[Getting started with the TI SensorTag CC2650]
+
+
+[abstract]
+icon:home[link="https://vittali.ch"]
+
+I want to connect wireless sensors to a BLE enabled device like a smartphone or tablet.
+I am also interested in long range/low volume sensor data transmission (Sub-1GHz).
+
+The {rTI-1} is a tiny board based on the {rTI-2}.
+I like it because of:
+
+* the small footprint (32 x 41 mm) allowing for integration
+in an existing project (for example via UART)
+thus enabling BLE/Sub-1GHz connectivity without having to deal with RF board design,
+* the comprehensive set of available sensors.
+
+Getting started with the SensorTag wasn't as easy as I hoped
+and this is a write-up of the problems I encountered.
+
+Source code related to this note can be cloned from the {r0}.
+
+== Introduction
+
+The name _CC1350STK_ is the official part number for the development kit,
+I will also use the term _SensorTag_ hereafter.
+A similar product {rTI-3} with single-band capability is also available {r8}.
+
+== Problems
+
+The problems encountered and discussed on the {rTI-4} revolve around several topics:
+
+. the SensorTag App <<e2e1>>, <<e2e2>>, <<e2e6>>
+. installation problems <<e2e11>>
+. software availability <<e2e9>>
+. choice of the debug probe <<e2e4>>, <<e2e5>>, <<e2e8>>
+. project configuration files <<e2e4>>, <<e2e8>>, <<e2e12>>
+. connection problems <<e2e4>>, <<e2e10>>
+
+
+== Hardware Preparation and Requirements
+
+I used the following hardware:
+
+* the {rTI-1}
+* the {rTI-5} (not supported, as it turned out) and the {rTI-6}
+
+and the following software;
+
+* Linux Mint 18.2
+* Code Composer Studio 9.1 (CCS)
+* SimpleLink CC13x0 SDK, version 3.20.0.23 <<st-sw3>>
+
+The Sensor Tag comes with a lithium coin cell.
+For development, I prefer a stable lab power supply:
+
+.The CC1350STK without coin cell slot ready for an external supply (1.8V - 3.8V)
+image::CC1350.jpg[CC1350STK, 300]
+
+
+NOTE: Do not leave the coin battery inserted during debugging. The battery will be drained in less than a day.
+
+=== Using the XDS110 debug probe
+
+The {rTI-5} can be hooked up to the SensorTag via a JTAG cable and a small adapter board.
+
+WARNING: while the connection between the probe and the SensorTag is
+electrically correct, I was unable to get the XDS110 to work in with the SensorTag.
+
+
+[[JTAG, XDS110 connection]]
+.JTAG connection between the XSD110 debugger and the CC1350STK ( the small adapter PCB is part of the XDS110 deliverable)
+image::XDS110.jpg[JTAG connection, 300]
+
+=== Using the SensorTag DevPack
+
+The {rTI-6} is the recommended probe for the SensorTag.
+
+[[DevPack]]
+.The DevPack probe mounted onto the CC1350STK
+image::DevPack.jpg[DevPack, 300]
+
+WARNING: Remove the coin battery, it will be quickly drained by the debug connection.
+
+== Loading the sample project
+
+I used the _uartecho_CC1350STK_ project because it not only serves as a basic sanity check for the environment but also as a proof
+that the serial-over-USB host-target connection works as expected.
+
+Download and install the project from the Resource Explorer:
+
+[[uartecho_CC1350STK]]
+.Loading the sample project into the IDE
+image::uartecho-project.png[sample project]
+
+Verify that the required products are installed and selected:
+
+[[products]]
+.Required products
+image::installed-products.png[required products]
+
+Verify the target configuration:
+
+[[targetconf, target configuration]]
+.Target configuration
+image::target-conf.png[target configuration]
+
+And the debug settings:
+
+.Debug settings
+image::debug-settings.png[debug settings]
+
+Ready to start the first debug session with the `uartecho_CC1350STK_tirtos_ccs` sample project.
+The companion tutorial {r8} shows how to activate <<../3-CC2650-ST/index.adoc#logging>>
+with the System Analyzer for the CC2650 SensorTag.
+The procedure is the same for the CC1350STK.
+
+== Conclusion
+
+The SensorTag is not a full blown development kit and there is a reason why the product page {rTI-1} recommends to use a suitable LaunchPad rather than the SensorTag for development.
+However, the corresponing LaunchPad has a much larger footprint and no sensors,
+therefore the SensorTag can provide value for small projects and prototypes where
+dual BLE/Sub-1GHz connectivity and additional sensors are desirable.
+
+== References
+
+[bibliography]
+=== Technical Documents
+
+- [[[td1]]] http://www.ti.com/lit/ds/swrs183b/swrs183b.pdf[CC1350SimpleLink™ Ultra-Low-PowerDual-Band Wireless MCU]
+
+[bibliography]
+==== More literature
+
+- [[[ml2]]] http://www.ti.com/lit/ug/swru488b/swru488b.pdf[TI 15.4-StackCC13x0 SimpleLink™ Embedded Example Applications]
+
+[bibliography]
+=== Development Tools
+
+- [[[dt1]]] http://www.ti.com/tool/CC1350STK[SimpleLink™ Bluetooth low energy/Multi-standard SensorTag CC1350STK]
+- [[[dt2]]] http://www.ti.com/tool/LAUNCHXL-CC1350[SimpleLink™ Dual-Band CC1350 Wireless MCU LaunchPad Development Kit]
+
+[bibliography]
+=== Software
+
+- [[[sw1]]] http://software-dl.ti.com/simplelink/esd/simplelink_cc13x0_sdk/2.20.00.38/exports/docs/documentation_overview_simplelink_cc13x0_sdk.html[SimpleLink™ CC13x0 SDK 2.20.00.38 Documentation Overview]
+
+include::{includedir}/ste2e.adoc[]
+include::{includedir}/st.adoc[]
+include::{includedir}/mcu.adoc[]
+include::{includedir}/ble.adoc[]
+include::{includedir}/15_4.adoc[]

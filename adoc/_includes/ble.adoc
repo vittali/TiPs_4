@@ -1,0 +1,19 @@
+
+=== BLE
+
+[bibliography]
+==== Technical Documents
+
+- [[[ble-td1]]] https://github.com/ti-simplelink/ble_examples/tree/ble_examples-2.2[Extra examples for TI BLE-Stack 2.2.x SDK]
+- [[[ble-td2]]] http://software-dl.ti.com/lprf/simplelink_academy/modules/ble_01_basic/ble_01_basic.html[Bluetooth Low Energy Fundamentals]
+
+[bibliography]
+==== TI E2E support forum
+
+- [[[ble-e2e1]]] https://e2e.ti.com/support/wireless-connectivity/bluetooth/f/538/t/404236[BLE Getting Started and FAQ]
+- [[[ble-e2e2]]] https://e2e.ti.com/support/wireless-connectivity/bluetooth/f/538/t/594609[Bluetooth® 5 Is Here: Top Five Questions Answered [Updated with Long Range Connections]
+
+[bibliography]
+==== Software
+
+- [[[ble-sw1]]] http://www.ti.com/lit/zip/swrc258[TI BLE Device Monitor]
