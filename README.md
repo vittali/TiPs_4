@@ -1,1 +1,1 @@
-https://vittali.ch/4-CC1350-ST
+https://vittali.ch/#_tips_4
